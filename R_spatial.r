@@ -68,5 +68,16 @@ setwd('C:/Users/Sery/Desktop/Lab')
 
 covid<- read.table('covid_agg.csv', header=TRUE)
 covid
+head(covid)
+
+summary(covid)
+
+## ggplot2
+library(ggplot2)
+ggplot(covid, aes (x= lon, y= lat)) + geom_point()  #graph of the world with coordinate, one pointxcountry
+
+#changing the size of the data(point) in relation of number of cases ---> size = cases
+ggplot(covid, aes (x= lon, y= lat, size = cases)) + geom_point()
+
 
 
