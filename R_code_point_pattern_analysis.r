@@ -21,7 +21,7 @@ covid_planar <-ppp(lon, lat, c(-180,180), c(-90,90))
 
 density_map <- density(covid_planar)
 
-plot(density_map)  #show the graph of the density of the data
+plot(density_map)  #show in the graph the density of the data
 
 points (covid_planar) #show the point on the density map
 
@@ -31,11 +31,56 @@ plot(density_map, col=cl)
 points (covid_planar)
 
 # Exercise: change the colour of the map
-cl <- colorRampPalette(c('blue','yellow','orange','red','magenta'))(100)
+cl <- colorRampPalette(c('blue','yellow','orange','red','magenta'))(100) #100->number of colours of the range palette
 plot(density_map, col=cl)
 points (covid_planar)
 
 # Putting the countries on top of the map
 install.packages('rgdal')
+
+library(rgdal)
+
+coastlines <- readOGR('ne_10m_coastline.shp') 
+
+##Replot the density map
+
+#cl <- colorRampPalette(c('blue','yellow','orange','red','magenta'))(100)
+plot(density_map, col=cl)
+points (covid_planar)
+plot(coastlines, add=TRUE) #true/folds-> plot the image on the top of the previews map and not in a different window
+
+#change the point type--->phc=19
+plot(density_map, col=cl)
+points (covid_planar, pch=19, cex=0.5)
+plot(coastlines, add=TRUE)
+
+#Save the map as an png
+png ('figure1.png')
+cl <- colorRampPalette(c('blue','yellow','orange','red','magenta'))(100)
+plot(density_map, col=cl)
+points (covid_planar, pch=19, cex=0.5)
+plot(coastlines, add=TRUE)
+dev.off()
+
+#save as pdf
+pdf('figur.pdf')
+cl <- colorRampPalette(c('blue','yellow','orange','red','magenta'))(100)
+plot(density_map, col=cl)
+points (covid_planar, pch=19, cex=0.5)
+plot(coastlines, add=TRUE)
+dev.off()
+
+
+#Interpolate case data
+
+marks(covid_planar) <- cases  #link the cases to the marks
+cases_map <- Smooth(covid_planar)
+
+plot(cases_map, col=cl)
+points(covid_planar)
+plot(coastlines, add=T)  #the density is oriented to china because there are the high number of cases
+
+
+
 
 
