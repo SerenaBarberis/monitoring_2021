@@ -117,7 +117,31 @@ plot(Spoints, cex=Spoints$cases/10000, col = 'purple3', lwd =3, add=T)  #/10000 
 # put the coastline on the map
 
 library(rgdal)
+#put a smoother to the coastlines by resampling
 coastlines <- readOGR('ne_10m_coastline.shp')
 plot(coastlines, add=T)
 
-#put a smoother to the coastlines by resampling
+
+##### Leonardo Zabotti data
+ 
+#setwd()
+
+leo <- read.table('dati_zabotti.csv', head=T, sep=',') #head=header
+
+head(leo)
+
+attach(leo)
+
+library(spatstat)
+
+summary(leo)
+
+leo_ppp <- ppp (x,y,c(2300000, 2325000), c(5005000, 5045000)) # range of x and range of y (min and max)
+
+plot(leo_ppp)
+
+density_map <- density(leo_ppp)
+plot(density_map)
+points(leo_ppp)
+ #save workspace
+q()
