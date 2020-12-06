@@ -145,3 +145,64 @@ plot(density_map)
 points(leo_ppp)
  #save workspace
 q()
+
+
+###### Interpolation of students data #######
+
+setwd()
+
+load('point_pattern_analysis.RData') #
+
+ls() #list of file in the .Rdata
+
+head(leo)
+
+library(spatstat)
+attach(leo)
+marks(leo_ppp) <- chlh #explain to R the variable that we want to use
+
+chlh_map <- Smooth(leo_ppp)
+cl <- colorRampPalette(c('yellow' , 'orange' , 'red' , 'green'))(100)
+plot(chlh_map, col=cl)
+points(leo_ppp)
+
+# Exercise: do the same for chlorophil chlh in the sediment
+
+marks(leo_ppp) <- chls
+chls_map <- Smooth (leo_ppp)
+plot (chls_map, col=cl)
+points (leo_ppp)
+
+# multipanel
+
+par (mfrow=c(1,3))
+ 
+# first graph: density map
+plot (density_map, col=cl)
+points (leo_ppp)
+
+# second graph: chlh
+plot(chlh_map, col=cl)
+points(leo_ppp)
+
+# third graph
+plot (chls_map, col=cl)
+points (leo_ppp)
+
+# Exercise: build a multipane with 3 rows and 1 column
+
+par (mfrow = c(3,1))
+
+# first graph: density_ map
+plot (density_map, col=cl)
+points (leo_ppp)
+
+# second graph: chlh
+plot(chlh_map, col=cl)
+points(leo_ppp)
+
+# third graph
+plot (chls_map, col=cl)
+points (leo_ppp)
+
+
