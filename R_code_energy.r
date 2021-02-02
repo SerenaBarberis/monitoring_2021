@@ -98,11 +98,31 @@ plot (dvi1, col=cl, main='DVI before cut')
 plot (dvi2, col=cl, main='DVI after cut')
 
 # difference between dvi1 and dvi2 (decrease of biomass and capacity to photosynthesis (difference biomass before cut and after cut)
+difdvi <- dvi1 - dvi2
+dev.off()
+plot(difdvi)
 
+#change color
+cldif <- colorRampPalette (c('blue', 'white', 'red'))(100)
+plot (difdvi, col=cldif, main= 'amount of energy lost') #show the amount of biomass during the cut
 
+hist(difdvi, col='red') #the positive values are more than negative, it means a big decrease of biomass
 
+# final par (6 different maps togheter)
+#defor1
+#defor2
+#dvi1
+#dvi2
+#difdvi
+#histogram
 
-
+par(mfrow=c(3,2))
+plotRGB (defor1, r=1, g=2, b=3, stretch='lin')
+plotRGB (defor2, r=1, g=2, b=3, stretch='lin')
+plot (dvi1, col=cl, main='DVI before cut')
+plot (dvi2, col=cl, main='DVI after cut')
+plot (difdvi, col=cld, main= 'amount of energy lost')
+hist(difdvi, col='red')
 
 
 
