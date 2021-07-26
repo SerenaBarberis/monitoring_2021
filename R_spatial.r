@@ -5,7 +5,7 @@ library(sp)
 
 data(meuse)
 
-head(meuse)
+head(meuse)  #first rows of the table
 
 coordinates(meuse) = ~ x+y
 
