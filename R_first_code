@@ -9,20 +9,20 @@ crabs<-c(100,70,30,10,5)
 crabs
 
 #fisrt plot in R
-plot(primates,crabs)
+plot(primates,crabs) #primate on the x axis, crabs on the y
 
 plot(primates,crabs, col='blue')
 
-plot(primates,crabs, col='blue', pch=19)
+plot(primates,crabs, col='blue', pch=19) #pch change form of the point in the graph
 
-plot(primates,crabs, col='blue', pch=19, cex=2)
+plot(primates,crabs, col='blue', pch=19, cex=2) #cex: characters exageration, increase che dimension of the point
 
 plot(primates,crabs, col='blue', pch=19, cex=6)
 
-plot(primates,crabs, col='blue', pch=19, cex=6, main='My first ecological graph in R!')
+plot(primates,crabs, col='blue', pch=19, cex=6, main='My first ecological graph in R!') #main: title for the graph
 
 #create a dataframe
-ecoset<-data.frame(primates,crabs)
+ecoset<-data.frame(primates,crabs) #make a table 
 ecoset
 
 #ecological numbers
