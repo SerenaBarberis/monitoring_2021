@@ -97,8 +97,8 @@ diff_temp<- temp_2002 - temp2021
 #Change the default color 
 cl <- colorRampPalette(c('blue','grey','red')) (100)
 
-#
+#Comparison of the surface temperature, we see a general increase of temperature (expressed in Kelvin)
 par(mfrow=c(1,3))
-> plot(temp_2002)
-> plot(temp_2021)
-> plot(diff,col=cl)
+plot(temp_2002, main='November 2002')
+plot(temp_2021, main='November 2021')
+plot(diff,col=cl, main='Difference between 2002-2021')
