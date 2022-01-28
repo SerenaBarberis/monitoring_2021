@@ -39,7 +39,7 @@ plot(c2001$map, main='2001')
 plot(c2011$map, main='2011')
 plot(c2021$map, main='2021')
 
-#calculte the frequancy of the pixel class
+#calculte the frequancy of the pixel class, for each class we have the number of the pixel 
 freq(c2001$map) 
 freq(c2011$map)
 freq(c2021$map)
@@ -59,12 +59,15 @@ s3<-4677193+16838172
 prop21<-freq(c2021$map)/s3
 prop21
 
-#Make the table of the percent: the coloumns are the year and the rows the pixel corresponding to water and soil
+#Make the table of the percent: the columns are the year and the rows the pixel corresponding to water and soil
+#definition of columns and rows
 exspansion<-c('Lake','Soil')
 perc_2001<-c(14.8,85.2)
 perc_2011<-c(21.1,79)
 perc_2021<-c(21.7,80)
-graph<-data.frame(expansion, perc_2001, perc_2011, perc_2021)
+
+#Make the table
+table<-data.frame(expansion, perc_2001, perc_2011, perc_2021)
 
 #Make a graph for each year
 #2001
