@@ -1,80 +1,103 @@
 ### R_code_exam ###
 
+#The aim of the code it's investigate the expansion of Siling Lake, located in the Tibet Autonomous Region and also investigate the change of the surface temperature.
+#The expansion of the lake and the increase of temperature it's cause mainly by climate change, that influence the amount of precipitation, the evotraspiration and the melting of glaciers.
+#The image used for the time serier analysis were downloaded from USGS earth explorer (https://earthexplorer.usgs.gov/) and Copernicus Global Land Service (https://land.copernicus.eu/global/products/lswt).
+
+#Required packages
 library(RStoolbox)
 library(raster)
 library(ggplot2)
 
+#Set the working directory
 setwd()
 
-#importo i file tif su r e poi li trasformo in raster layer, in modo da visualizzarli con i colori naturali
-
+#Import the tiff file with the function list.file, for each year there are four images corresponding to the bands used. The images were from to Landsat 7 and 8.
 list_2001<-list.files(pattern='20011111_SR_B')
 list_2011<-list.files(pattern='20111123_SR_B')
 list_2021<-list.files(pattern='20211126_SR_B')
 
+#Create a rasterlayer with 4 band: blue, green, red, near infrared 
 img_2001<-stack(list_2001)
 img_2011<-stack(list_2011)
 img_2021<-stack(list_2021)
 
+#Sovrapposition of the band for natural colours, in this way we can already perceive the expansion of the Lake without any calculation 
 par(mfrow=c(1,3))
-plotRGB(img_2001,4,3,2,stretch='lin', axes=T,main='2001')
-plotRGB(img_2011,4,3,2,stretch='lin', axes=T,main='2011')s
-plotRGB(img_2021,4,3,2,stretch='lin', axes=T,main='2021')
+plotRGB(img_2001,4,3,2,stretch='lin', axes=T,main='November 2001')
+plotRGB(img_2011,4,3,2,stretch='lin', axes=T,main='November 2011')
+plotRGB(img_2021,4,3,2,stretch='lin', axes=T,main='November 2021')
 
-#classificazione dei pixel per calcolo espansione laghi
+#Proceed to the classification pixel to calculate the percent of the expansion of the Siling Lake
 c2001<-unsuperClass(img_2001,nclasses=2)
 c2011<-unsuperClass(img_2011,nclasses=2)
 c2021<-unsuperClass(img_2021,nclasses=2)
 
+#To view the map of the classification of the pixel for each year
 par(mfrow=c(1,3))
 plot(c2001$map, main='2001')
 plot(c2011$map, main='2011')
 plot(c2021$map, main='2021')
 
-#calcolo pixel
-freq(c2001$map)
+#calculte the frequancy of the pixel class
+freq(c2001$map) 
 freq(c2011$map)
 freq(c2021$map)
 
+#Calculation the percent area of Lake and soil for 2001
 s1<- 4325109+25045750
-prop1<-freq(c2001$map)/s1
+prop01<-freq(c2001$map)/s1
+prop01
 
+#Calculation the percent area of Lake and soil for 2011
 s2<-3383070+12671696
-prop2<-freq(c2011$map)/s2
+prop11<-freq(c2011$map)/s2
+prop11
 
+#Calculation the percent area of Lake and soil for 2021
 s3<-4677193+16838172
-prop3<-freq(c2021$map)/s3
+prop21<-freq(c2021$map)/s3
+prop21
 
-prop1
-prop2
-prop3
+#Make the table of the percent: the coloumns are the year and the rows the pixel corresponding to water and soil
+exspansion<-c('Lake','Soil')
+perc_2001<-c(14.8,85.2)
+perc_2011<-c(21.1,79)
+perc_2021<-c(21.7,80)
+graph<-data.frame(expansion, perc_2001, perc_2011, perc_2021)
 
-#tabella
-> exspansion<-c('Lake','Soil')
-> perc_2001<-c(14.8,85.2)
-> perc_2011<-c(21.1,79)
-> perc_2021<-c(21.7,80)
-> graph<-data.frame(expansion, perc_2001, perc_2011, perc_2021)
-
+#Make a graph for each year
+#2001
 p1<-ggplot(graph, aes(x=exspansion,, y=perc_2001, color=exspansion)) + 
 geom_bar(stat="identity", fill="blue")
 
+#2011
 p2<-ggplot(graph, aes(x=exspansion, y=perc_2011, color=exspansion)) + 
 geom_bar(stat="identity", fill="blue")
 
+#2021
 p3<-ggplot(graph, aes(x=exspansion, y=perc_2021, color=exspansion)) + 
 geom_bar(stat="identity", fill="blue")
+
+#Comparison the lake and soil area for each year
 grid.arrange(p1, p2,p3,nrow = 1)
 
-#calcolo temperatura con immagini copernicus
+#Analysis of the surface temperature of the Siling Lake, the images were from to Sentinel 2 
+
+#Import the images and create a raster layer
+#2002
 temp_2002<-raster('c_gls_LSWT-lake-surface-water-temperature_200211110000_CUSTOM_AATSR_v1.0.2.tiff')
 
+#2021
 temp_2021<-raster('c_gls_LSWT-lake-surface-water-temperature_202111110000_CUSTOM_SLSTRAB_v1.1.0.tiff')
 
+#Calculation of the pixel difference between 2002 and 2021, to see where the surface temperature changed
 diff_temp<- temp_2002 - temp2021
 
+#Change the default color 
 cl <- colorRampPalette(c('blue','grey','red')) (100)
 
+#
 par(mfrow=c(1,3))
 > plot(temp_2002)
 > plot(temp_2021)
