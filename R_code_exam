@@ -68,7 +68,12 @@ perc_2011<-c(21.1,79)
 perc_2021<-c(21.7,80)
 
 #Make the table
-table<-data.frame(expansion, perc_2001, perc_2011, perc_2021)
+table<-data.frame(exspansion, perc_2001, perc_2011, perc_2021)
+
+#  exspansion perc_2001 perc_2011 perc_2021
+#1       Lake      14.8      21.1      21.7
+#2       Soil      85.2      79.0      80.0
+
 
 #Make a graph for each year
 #2001
@@ -96,7 +101,7 @@ temp_2002<-raster('c_gls_LSWT-lake-surface-water-temperature_200211110000_CUSTOM
 temp_2021<-raster('c_gls_LSWT-lake-surface-water-temperature_202111110000_CUSTOM_SLSTRAB_v1.1.0.tiff')
 
 #Calculation of the pixel difference between 2002 and 2021, to see where the surface temperature changed
-diff_temp<- temp_2002 - temp2021
+diff_temp<- temp_2002 - temp_2021
 
 #Change the default color 
 cl <- colorRampPalette(c('blue','grey','red')) (100)
@@ -105,4 +110,4 @@ cl <- colorRampPalette(c('blue','grey','red')) (100)
 par(mfrow=c(1,3))
 plot(temp_2002, main='November 2002')
 plot(temp_2021, main='November 2021')
-plot(diff,col=cl, main='Difference between 2002-2021')
+plot(diff_temp,col=cl, main='Difference between 2002-2021')
