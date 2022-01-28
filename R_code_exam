@@ -8,9 +8,10 @@
 library(RStoolbox)
 library(raster)
 library(ggplot2)
+library(gridExtra)
 
 #Set the working directory
-setwd()
+setwd('C:/Users/Sery/Desktop/exam')
 
 #Import the tiff file with the function list.file, for each year there are four images corresponding to the bands used. The images were from to Landsat 7 and 8.
 list_2001<-list.files(pattern='20011111_SR_B')
