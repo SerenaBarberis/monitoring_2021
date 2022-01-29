@@ -78,15 +78,15 @@ table<-data.frame(expansion, perc_2001, perc_2011, perc_2021)
 
 #Make a graph for each year
 #2001
-p1<-ggplot(graph, aes(x=expansion,, y=perc_2001, color=exspansion)) + 
+p1<-ggplot(graph, aes(x=expansion,, y=perc_2001, color=expansion)) + 
 geom_bar(stat="identity", fill="blue")
 
 #2011
-p2<-ggplot(graph, aes(x=expansion, y=perc_2011, color=exspansion)) + 
+p2<-ggplot(graph, aes(x=expansion, y=perc_2011, color=expansion)) + 
 geom_bar(stat="identity", fill="blue")
 
 #2021
-p3<-ggplot(graph, aes(x=expansion, y=perc_2021, color=exspansion)) + 
+p3<-ggplot(graph, aes(x=expansion, y=perc_2021, color=expansion)) + 
 geom_bar(stat="identity", fill="blue")
 
 #Comparison the lake and soil area for each year, we can see that the water has increased its area by 7%
