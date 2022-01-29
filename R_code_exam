@@ -1,8 +1,8 @@
 ### R_code_exam ###
 
-#The aim of the code it's investigate the expansion of Siling Lake, located in the Tibet Autonomous Region and also investigate the change of the surface temperature.
-#The expansion of the lake and the increase of temperature it's cause mainly by climate change, that influence the amount of precipitation, the evotraspiration and the melting of glaciers.
-#The image used for the time serier analysis were downloaded from USGS earth explorer (https://earthexplorer.usgs.gov/) and Copernicus Global Land Service (https://land.copernicus.eu/global/products/lswt).
+#The aim of the code it's investigate the expansion of Siling Lake, located in the Tibet Autonomous Region and also investigate the change of surface temperature.
+#The expansion of the lake and the increase of temperature it's cause mainly by climate change, that influenced the amount of precipitation, the evotraspiration and the melting of glaciers.
+#The images used for the timeseries analysis were downloaded from USGS Earth Explorer (https://earthexplorer.usgs.gov/) and Copernicus Global Land Service (https://land.copernicus.eu/global/products/lswt).
 
 #Required packages
 library(raster)
@@ -12,7 +12,7 @@ library(gridExtra)
 #Set the working directory
 setwd('C:/Users/Sery/Desktop/exam')
 
-#Import the tiff file with the function list.file, for each year there are four images corresponding to the bands used. The images were from to Landsat 7 and 8.
+#Import the tiff file with the function list.file, for each year (2001,2011,2021) there are four images corresponding to the bands used. The images were from to Landsat 7 and 8.
 list_2001<-list.files(pattern='20011111_SR_B')
 list_2011<-list.files(pattern='20111123_SR_B')
 list_2021<-list.files(pattern='20211126_SR_B')
@@ -39,7 +39,7 @@ plot(c2001$map, main='2001')
 plot(c2011$map, main='2011')
 plot(c2021$map, main='2021')
 
-#calculte the frequancy of the pixel class, for each class we have the number of the pixel 
+#calculte the frequency of the pixel class, for each class we have the number of the pixel 
 freq(c2001$map) 
 freq(c2011$map)
 freq(c2021$map)
@@ -60,35 +60,38 @@ prop21<-freq(c2021$map)/s3
 prop21
 
 #Make the table of the percent: the columns are the year and the rows the pixel corresponding to water and soil
-#definition of columns and rows
+#Define rows
 exspansion<-c('Lake','Soil')
+
+#Define columns
 perc_2001<-c(14.8,85.2)
 perc_2011<-c(21.1,79)
 perc_2021<-c(21.7,80)
 
 #Make the table
-table<-data.frame(exspansion, perc_2001, perc_2011, perc_2021)
+table<-data.frame(expansion, perc_2001, perc_2011, perc_2021)
 
-#  exspansion perc_2001 perc_2011 perc_2021
+#  expansion perc_2001 perc_2011 perc_2021
 #1       Lake      14.8      21.1      21.7
 #2       Soil      85.2      79.0      80.0
 
 
 #Make a graph for each year
 #2001
-p1<-ggplot(graph, aes(x=exspansion,, y=perc_2001, color=exspansion)) + 
+p1<-ggplot(graph, aes(x=expansion,, y=perc_2001, color=exspansion)) + 
 geom_bar(stat="identity", fill="blue")
 
 #2011
-p2<-ggplot(graph, aes(x=exspansion, y=perc_2011, color=exspansion)) + 
+p2<-ggplot(graph, aes(x=expansion, y=perc_2011, color=exspansion)) + 
 geom_bar(stat="identity", fill="blue")
 
 #2021
-p3<-ggplot(graph, aes(x=exspansion, y=perc_2021, color=exspansion)) + 
+p3<-ggplot(graph, aes(x=expansion, y=perc_2021, color=exspansion)) + 
 geom_bar(stat="identity", fill="blue")
 
-#Comparison the lake and soil area for each year
+#Comparison the lake and soil area for each year, we can see that the water has increased its area by 7%
 grid.arrange(p1, p2,p3,nrow = 1)
+
 
 #Analysis of the surface temperature of the Siling Lake, the images were from to Sentinel 2 
 
