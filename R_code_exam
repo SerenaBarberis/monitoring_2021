@@ -22,24 +22,24 @@ img_2001<-stack(list_2001)
 img_2011<-stack(list_2011)
 img_2021<-stack(list_2021)
 
-#Sovrapposition of the band for natural colours, in this way we can already perceive the expansion of the Lake without any calculation 
+#Overlap the bands for natural colours, in this way we can already perceive the expansion of the Lake without any calculation 
 par(mfrow=c(1,3))
 plotRGB(img_2001,4,3,2,stretch='lin', axes=T,main='November 2001')
 plotRGB(img_2011,4,3,2,stretch='lin', axes=T,main='November 2011')
 plotRGB(img_2021,4,3,2,stretch='lin', axes=T,main='November 2021')
 
-#Proceed to the classification pixel to calculate the percent of the expansion of the Siling Lake
+#Proceed to the classification pixels to calculate the percent of the expansion of the Siling Lake
 c2001<-unsuperClass(img_2001,nclasses=2)
 c2011<-unsuperClass(img_2011,nclasses=2)
 c2021<-unsuperClass(img_2021,nclasses=2)
 
-#To view the map of the classification of the pixel for each year
+#To view the map of the classification of the pixels for each year
 par(mfrow=c(1,3))
 plot(c2001$map, main='2001')
 plot(c2011$map, main='2011')
 plot(c2021$map, main='2021')
 
-#calculte the frequency of the pixel class, for each class we have the number of the pixel 
+#calculte the frequency of the pixels class, for each class we have the number of the pixels 
 freq(c2001$map) 
 freq(c2011$map)
 freq(c2021$map)
@@ -108,7 +108,7 @@ diff_temp<- temp_2002 - temp_2021
 #Change the default color 
 cl <- colorRampPalette(c('blue','grey','red')) (100)
 
-#Comparison of the surface temperature, we see a general increase of temperature (expressed in Kelvin)
+#Comparison the surface temperature, we see a general increase of temperature (expressed in Kelvin)
 par(mfrow=c(1,3))
 plot(temp_2002, main='November 2002')
 plot(temp_2021, main='November 2021')
