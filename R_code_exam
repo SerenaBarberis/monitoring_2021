@@ -1,13 +1,14 @@
 ### R_code_exam ###
 
-#The aim of the code it's investigate the expansion of Siling Lake, located in the Tibet Autonomous Region and also investigate the change of surface temperature.
+#The aim of the code it's investigate the expansion of Siling Lake and the other water mass surrounding the lake,that located in the Tibet Autonomous Region and also investigate the change of surface temperature.
 #The expansion of the lake and the increase of temperature it's cause mainly by climate change, that influenced the amount of precipitation, the evotraspiration and the melting of glaciers.
 #The images used for the timeseries analysis were downloaded from USGS Earth Explorer (https://earthexplorer.usgs.gov/) and Copernicus Global Land Service (https://land.copernicus.eu/global/products/lswt).
 
 #Required packages
-library(raster)
+library(raster) 
 library(ggplot2)
 library(gridExtra)
+library(RStoolbox)
 
 #Set the working directory
 setwd('C:/Users/Sery/Desktop/exam')
@@ -39,27 +40,27 @@ plot(c2001$map, main='2001')
 plot(c2011$map, main='2011')
 plot(c2021$map, main='2021')
 
-#calculte the frequency of the pixels class, for each class we have the number of the pixels 
+#Calculate the frequency of the pixels class, for each class we have the number of the pixels 
 freq(c2001$map) 
 freq(c2011$map)
 freq(c2021$map)
 
-#Calculation the percent area of Lake and soil for 2001
+#Calculation of percent area of Lake and soil for 2001
 s1<- 4325109+25045750
 prop01<-freq(c2001$map)/s1
 prop01
 
-#Calculation the percent area of Lake and soil for 2011
+#Calculation of percent area of Lake and soil for 2011
 s2<-3383070+12671696
 prop11<-freq(c2011$map)/s2
 prop11
 
-#Calculation the percent area of Lake and soil for 2021
+#Calculation of percent area of Lake and soil for 2021
 s3<-4677193+16838172
 prop21<-freq(c2021$map)/s3
 prop21
 
-#Make the table of the percent: the columns are the year and the rows the pixel corresponding to water and soil
+#Make the table of percent: the columns are the year and the rows the pixel corresponding to water and soil
 #Define rows
 exspansion<-c('Lake','Soil')
 
