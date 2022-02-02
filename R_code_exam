@@ -18,7 +18,7 @@ list_2001<-list.files(pattern='20011111_SR_B')
 list_2011<-list.files(pattern='20111123_SR_B')
 list_2021<-list.files(pattern='20211126_SR_B')
 
-#Create a rasterlayer with 4 band: blue, green, red, near infrared 
+#Create a rasterstack with 4 band: blue, green, red, near infrared 
 img_2001<-stack(list_2001)
 img_2011<-stack(list_2011)
 img_2021<-stack(list_2021)
