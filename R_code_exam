@@ -25,9 +25,9 @@ img_2021<-stack(list_2021)
 
 #Overlap the bands for natural colours, in this way we can already perceive the expansion of the Lake without any calculation 
 par(mfrow=c(1,3))
-plotRGB(img_2001,4,3,2,stretch='lin', axes=T,main='November 2001')
-plotRGB(img_2011,4,3,2,stretch='lin', axes=T,main='November 2011')
-plotRGB(img_2021,4,3,2,stretch='lin', axes=T,main='November 2021')
+plotRGB(img_2001,3,2,1,stretch='lin', axes=T,main='November 2001')
+plotRGB(img_2011,3,2,1,stretch='lin', axes=T,main='November 2011')
+plotRGB(img_2021,3,2,1,stretch='lin', axes=T,main='November 2021')
 
 #Proceed to the classification pixels to calculate the percent of the expansion of the Siling Lake
 c2001<-unsuperClass(img_2001,nclasses=2)
